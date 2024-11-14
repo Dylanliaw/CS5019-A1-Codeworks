@@ -1,0 +1,67 @@
+﻿@page
+@model CS5019_A1_Codeworks.Pages.Customer.CartModel
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<h2>Your Cart</h2>
+
+@if (Model.CartItemsWithProducts.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItemsWithProducts)
+            {
+                <tr id="cart-item-@item.ProductId">
+                    <td>
+                        <img src="@item.ImageUrl" alt="@item.Name" class="cart-image" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <form method="post" asp-page-handler="ChangeQuantity" asp-route-productId="@item.ProductId">
+                            <div class="input-group">
+                                <button type="submit" name="action" value="decrease" class="quantity-button">-</button>
+                                <input type="number" class="quantity-value" name="quantity" value="@item.Quantity" min="1" />
+                                <button type="submit" name="action" value="increase" class="quantity-button">+</button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>$@(item.Price * item.Quantity)</td>
+                    <td>
+                        <form method="post" asp-page-handler="RemoveItem" asp-route-productId="@item.ProductId">
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>Total: $@(Model.CartItemsWithProducts.Sum(item => item.Price * item.Quantity).ToString("0.00"))</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form method="post" asp-page-handler="ClearCart">
+        <button type="submit" id="clear-cart">Clear Cart</button>
+    </form>
+
+    <a asp-page="/Customer/Checkout" class="btn btn-primary">Proceed to Checkout</a>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

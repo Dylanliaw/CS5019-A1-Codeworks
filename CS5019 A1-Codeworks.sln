@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS5019 A1-Codeworks", "CS5019 A1-Codeworks.csproj", "{C6902343-04C4-4AAC-AD08-F06D07FBE3CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6902343-04C4-4AAC-AD08-F06D07FBE3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6902343-04C4-4AAC-AD08-F06D07FBE3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6902343-04C4-4AAC-AD08-F06D07FBE3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6902343-04C4-4AAC-AD08-F06D07FBE3CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {454F4B71-F1AD-4753-B408-FCDF71D5A2E6}
+	EndGlobalSection
+EndGlobal

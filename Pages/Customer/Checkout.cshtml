@@ -1,0 +1,66 @@
+﻿@page
+@model CS5019_A1_Codeworks.Pages.Customer.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" id="Name" name="Name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Phone">Phone</label>
+        <input type="text" id="Phone" name="Phone" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Address">Address</label>
+        <input type="text" id="Address" name="Address" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="City">City</label>
+        <input type="text" id="City" name="City" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="PostalCode">Postal Code</label>
+        <input type="text" id="PostalCode" name="PostalCode" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Country">Country</label>
+        <input type="text" id="Country" name="Country" class="form-control" required />
+    </div>
+
+    <!-- Payment Information -->
+    <div class="form-group">
+        <label for="CardNumber">Card Number</label>
+        <input type="text" id="CardNumber" name="CardNumber" class="form-control" maxlength="19" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ExpiryDate">Expiry Date</label>
+        <input type="text" id="ExpiryDate" name="ExpiryDate" class="form-control" maxlength="5" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CVV">CVV</label>
+        <input type="text" id="CVV" name="CVV" class="form-control" maxlength="3" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Complete Purchase</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

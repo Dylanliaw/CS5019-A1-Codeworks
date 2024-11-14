@@ -1,0 +1,47 @@
+﻿@page
+@model CS5019_A1_Codeworks.Pages.Customer.ProductDetailModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container product-detail-page">
+    <!-- Product Image and Details Section -->
+    <div class="row">
+        <!-- Product Image Section (Left) -->
+        <div class="col-md-6">
+            <div class="product-image">
+                <img src="@Model.Product.ImageUrl" alt="@Model.Product.ItemName" class="img-fluid" />
+            </div>
+        </div>
+
+        <!-- Product Details Section (Right) -->
+        <div class="col-md-6">
+            <div class="product-details">
+                <h2>@Model.Product.ItemName</h2>
+                <p><strong>Brand:</strong> @Model.Product.Brand</p>
+                <p><strong>Category:</strong> @Model.Product.Category</p>
+                <p><strong>Description:</strong> @Model.Product.Description</p>
+                <p class="price"><strong>Price:</strong> @Model.Product.SellingPrice.ToString("C")</p>
+                <p class="stock"><strong>Stock:</strong> @Model.Product.Stock</p>
+
+                <!-- Add to Cart Form -->
+                <form method="post" asp-page-handler="AddToCart" class="add-to-cart-form">
+                    <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+
+                    <!-- Quantity Adjuster -->
+                    <div class="quantity-control mb-3">
+                        
+                        <input type="number" name="quantity" value="1" min="1" max="@Model.Product.Stock" class="form-control quantity-input" id="quantity" />
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

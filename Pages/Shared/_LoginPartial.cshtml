@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using CS5019_A1_Codeworks.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+        if (User.IsInRole("admin"))
+        {
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    Admin
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+                </ul>
+            </li>
+              
+        } else if (User.IsInRole("client"))
+        {
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    User
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+                </ul>
+            </li>
+        }
+        else if (User.IsInRole("seller"))
+        {
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    Seller
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+                </ul>
+            </li>
+        }
+
+} else {
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            Account
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Sign In</a></li>
+        </ul>
+    </li>
+
+}
+</ul>

@@ -1,0 +1,51 @@
+﻿@page
+@model CS5019_A1_Codeworks.Pages.Admin.EditModel
+@using CS5019_A1_Codeworks.Models
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="NewProduct.ProductId" />
+
+    <div class="mb-3">
+        <label asp-for="NewProduct.ItemName" class="form-label">Item Name</label>
+        <input asp-for="NewProduct.ItemName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.Description" class="form-label">Description</label>
+        <input asp-for="NewProduct.Description" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.Brand" class="form-label">Brand</label>
+        <input asp-for="NewProduct.Brand" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.CostPrice" class="form-label">Cost Price</label>
+        <input asp-for="NewProduct.CostPrice" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.SellingPrice" class="form-label">Selling Price</label>
+        <input asp-for="NewProduct.SellingPrice" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.DiscountPrice" class="form-label">Discount Price</label>
+        <input asp-for="NewProduct.DiscountPrice" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.Stock" class="form-label">Stock</label>
+        <input asp-for="NewProduct.Stock" class="form-control" type="number" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.Category" class="form-label">Category</label>
+        <input asp-for="NewProduct.Category" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="NewProduct.ImageUrl" class="form-label">Upload Image (Optional)</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

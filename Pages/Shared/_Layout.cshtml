@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CS5019_A1_Codeworks</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CS5019_A1_Codeworks.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <!-- Logo -->
+                <a href="@Url.Page("/Index")" class="logo">
+                    <img src="~/images/logo.png" alt="Logo" class="img-fluid logo" />
+                </a>
+
+
+                <!-- User Options (Cart and Account) -->
+                <div class="user-options d-flex align-items-center">
+                    <a class="cart-icon me-3" asp-area="" asp-page="/Customer/Cart">
+                        <box-icon name='cart'></box-icon>
+                    </a>
+                    <div class="account-link">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="second-nav-bar-parent">
+        <div class="container-fluid">
+            <ul class="second-nav-bar">
+                <li class="nav-item">
+                    <a class="second-nav-item" asp-area="" asp-page="/Index">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="second-nav-item" asp-area="" asp-page="/Customer/Product">PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="second-nav-item" asp-area="" asp-page="/Customer/Location">FIND US!</a>
+                </li>
+
+                <!-- Conditionally show Admin link based on user role -->
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item">
+                        <a class="second-nav-item" asp-area="" asp-page="/Admin/Admin">ADMIN</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container d-flex justify-content-between">
+            <div class="left-footer">
+                &copy; 2024 AMK ENTERPRISE
+            </div>
+            <div class="footer-center-div">
+                <h5>CONTACT US</h5>
+                <ul class="list-unstyled d-inline-flex flex-column mb-0">
+                    <li>
+                        <box-icon color="white" class="footer-icons" type='logo' name='whatsapp'></box-icon>
+                        <a href="https://wa.me/7422230" target="_blank">WhatsApp</a>
+                    </li>
+                    <li>
+                        <box-icon color="white" class="footer-icons" name='instagram' type='logo'></box-icon>
+                        <a href="https://www.instagram.com" target="_blank">Instagram</a>
+                    </li>
+                    <li>
+                        <box-icon color="white" class="footer-icons" name='gmail' type='logo'></box-icon>
+                        <a href="mailto:your-email@example.com">Gmail</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-footer">
+                <h5>ADDRESS</h5>
+                <a href="https://maps.app.goo.gl/5uFzC7EMdUouk1M19" target="_blank">
+                    <p>Simpang 559 Unit 7, lo76469 KG, Masin Mukim Pengalan Batu Brunei Darussalam</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Libraries -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

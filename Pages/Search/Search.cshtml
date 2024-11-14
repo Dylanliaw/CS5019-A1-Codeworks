@@ -1,0 +1,35 @@
+﻿@page
+@model CS5019_A1_Codeworks.Pages.Search.SearchModel
+
+@{
+    ViewData["Title"] = "Product Search";
+}
+
+<h2>Search Results</h2>
+
+<form class="d-flex mb-4" method="get">
+    <input class="form-control me-2" type="search" name="query" placeholder="Search for products..." aria-label="Search" value="@Request.Query["query"]" />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+@if (Model.Products.Count == 0)
+{
+    <p>No products found matching your search criteria.</p>
+}
+else
+{
+    <div class="product-grid">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-card">
+                <img src="@product.ImageUrl" alt="@product.ItemName" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.ItemName</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><strong>@product.Price.ToString("C")</strong></p>
+                    <a href="@Url.Page("/Customer/ProductDetail", new { id = product.ProductId   })" class="btn btn-primary">View Product</a>
+                </div>
+            </div>
+        }
+    </div>
+}
