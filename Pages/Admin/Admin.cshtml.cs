@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using CS5019_A1_Codeworks.Models;
 using CS5019_A1_Codeworks.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace CS5019_A1_Codeworks.Pages.Admin
 {
@@ -18,16 +14,12 @@ namespace CS5019_A1_Codeworks.Pages.Admin
         private readonly IWebHostEnvironment _environment;
 
         [BindProperty]
-        public Product NewProduct { get; set; } = new Product();
+        public Product Product { get; set; }
 
         [BindProperty]
         public IFormFile Image { get; set; }
 
-        public List<Product> Products { get; set; } = new List<Product>();
-
-        // Search Query to retain the search value in the input
-        [BindProperty(SupportsGet = true)]
-        public string SearchQuery { get; set; }
+        public List<Product> Products { get; set; }
 
         public AdminModel(ApplicationDbContext context, IWebHostEnvironment environment)
         {
@@ -35,29 +27,30 @@ namespace CS5019_A1_Codeworks.Pages.Admin
             _environment = environment;
         }
 
+        // Method to handle displaying the products with search functionality
         public void OnGet()
         {
-            // Retrieve all products
-            var query = _context.Products.AsQueryable();
+            // Get the search term from the query string
+            var searchTerm = Request.Query["searchTerm"].ToString();
 
-            // Filter products based on the search query
-            if (!string.IsNullOrEmpty(SearchQuery))
+            // If there's a search term, filter the products
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                var lowerSearchQuery = SearchQuery.ToLower();
-
-                // Match any part of the product's details (name, description, brand, category)
-                query = query.Where(p =>
-                    p.ItemName.ToLower().Contains(lowerSearchQuery) ||
-                    p.Description.ToLower().Contains(lowerSearchQuery) ||
-                    p.Brand.ToLower().Contains(lowerSearchQuery) ||
-                    p.Category.ToLower().Contains(lowerSearchQuery)
-                );
+                Products = _context.Products
+                    .Where(p => p.ItemName.Contains(searchTerm) ||
+                                p.Description.Contains(searchTerm) ||
+                                p.Brand.Contains(searchTerm) ||
+                                p.Category.Contains(searchTerm))
+                    .ToList();
             }
-
-            // Assign the filtered list to the Products property
-            Products = query.ToList();
+            else
+            {
+                // If no search term, display all products
+                Products = _context.Products.ToList();
+            }
         }
 
+        // Method to handle adding a new product
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -83,20 +76,15 @@ namespace CS5019_A1_Codeworks.Pages.Admin
                 await Image.CopyToAsync(stream);
             }
 
-            NewProduct.ImageUrl = "/uploads/" + Image.FileName;
-
-            if (string.IsNullOrWhiteSpace(NewProduct.Category))
-            {
-                ModelState.AddModelError("Category", "Please provide a category.");
-                return Page();
-            }
-
-            _context.Products.Add(NewProduct);
+            // Save the product data including the image URL
+            Product.ImageUrl = "/uploads/" + Image.FileName;
+            _context.Products.Add(Product);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage();
+            return RedirectToPage("/Admin/Admin");
         }
 
+        // Method to handle deleting a product
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -105,7 +93,7 @@ namespace CS5019_A1_Codeworks.Pages.Admin
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage();
+            return RedirectToPage("/Admin/Admin");
         }
     }
 }
