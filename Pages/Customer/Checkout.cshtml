@@ -19,7 +19,9 @@
 
     <div class="form-group">
         <label for="Phone">Phone</label>
-        <input type="text" id="Phone" name="Phone" class="form-control" required />
+        <input type="tel" id="Phone" name="Phone" class="form-control" placeholder="Enter phone number"
+               inputmode="numeric" maxlength="10" pattern="[0-9]*" required
+               title="Phone number must only contain digits (no spaces or hyphens)." />
     </div>
 
     <div class="form-group">
@@ -45,22 +47,28 @@
     <!-- Payment Information -->
     <div class="form-group">
         <label for="CardNumber">Card Number</label>
-        <input type="text" id="CardNumber" autocomplete="off" name="CardNumber" class="form-control" maxlength="16" placeholder="0000-0000-0000-0000" required />
+        <input type="text" id="CardNumber" name="CardNumber" class="form-control" maxlength="16"
+               inputmode="numeric" pattern="[0-9]*" placeholder="0000 0000 0000 0000" required
+               title="Card number must only contain digits." />
     </div>
 
     <div class="form-group">
         <label for="ExpiryDate">Expiry Date</label>
-        <input type="text" id="ExpiryDate" autocomplete="off" name="ExpiryDate" class="form-control" maxlength="4" placeholder="MM/YY"  required />
+        <input type="text" id="ExpiryDate" name="ExpiryDate" class="form-control" maxlength="4"
+               inputmode="numeric" pattern="[0-9]*" placeholder="MM/YY" required
+               title="Expiry date must be in MMYY format with digits only." />
     </div>
 
     <div class="form-group">
         <label for="CVV">CVV</label>
-        <input type="text" id="CVV" name="CVV" class="form-control" maxlength="3" placeholder="***" required />
+        <input type="text" id="CVV" name="CVV" class="form-control" maxlength="3"
+               inputmode="numeric" pattern="[0-9]*" placeholder="***" required
+               title="CVV must only contain digits." />
     </div>
 
     <button type="submit" class="btn btn-primary">Complete Purchase</button>
 </form>
 
 @section Scripts {
-    <script src="~/js/site.js"></script>
+    <script src="~/js/cart.js"></script>
 }

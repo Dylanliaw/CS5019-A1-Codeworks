@@ -42,20 +42,15 @@
         let total = 0;
         const rows = document.querySelectorAll("tr[id^='cart-item-']");
         rows.forEach(row => {
-            const price = parseFloat(row.querySelector("td:nth-child(3)").textContent.replace('$', '').trim());
-            const quantity = parseInt(row.querySelector("td:nth-child(4)").textContent.trim());
+            const price = parseFloat(row.querySelector("td:nth-child(2)").textContent.replace('$', '').trim());
+            const quantity = parseInt(row.querySelector("td:nth-child(3)").textContent.trim());
             total += price * quantity;
         });
 
         // Update the total element
-        const totalElement = document.querySelector("h3:contains('Total')");
+        const totalElement = document.querySelector("h3");
         if (totalElement) {
             totalElement.textContent = "Total: $" + total.toFixed(2);
         }
     }
-
-   
-    
-   
 });
-
